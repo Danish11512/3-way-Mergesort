@@ -6,8 +6,8 @@
 void mergesortthird(int *a, int *aux, int length) {
     int temp, i, j, k, cursor = 0;
 
-    if (length >1) // base case takes care of 2 and 1
-
+    if (length > 1)// base case takes care of 2 and 1
+    {
         //CCHANAGE
 
         if (length == 2) // change format
@@ -34,9 +34,9 @@ void mergesortthird(int *a, int *aux, int length) {
 
         // one where each one is exhausted
         // one where two are exhausted, so just move all of the last one
-        for (cursor =0,i = 0, j = length / 3, k = (2*length/3); cursor<length;) {
+        for (cursor = 0, i = 0, j = length / 3, k = (2 * length / 3); cursor < length;) {
             // If no array has been exhausted
-            if (i < (length/3) && j < (2*length/3) && k < length) {   // i is the smallest
+            if (i < (length / 3) && j < (2 * length / 3) && k < length) {   // i is the smallest
                 if (a[i] < a[j] && a[i] < a[k]) {
                     aux[cursor++] = a[i++];
                 }
@@ -52,52 +52,53 @@ void mergesortthird(int *a, int *aux, int length) {
                 }
             }
 
-                //if i is exhausted (i = length/3)
-                if (i == (length / 3) && j < ((2 * length / 3)) && k < length) {
-                    if (a[j] < a[k]) {
-                        aux[cursor++] = a[j++];
-                    } else {
-                        aux[cursor++] = a[k++];
-                    }
-                }
-
-                //if j is exhausted (j = (2*length/3)))
-                if (j == (2 * length / 3) && i < length / 3 && k < length) {
-                    if (a[i] < a[k]) {
-                        aux[cursor++] = a[i++];
-                    } else {
-                        aux[cursor++] = a[k++];
-                    }
-                }
-
-                //if k is exhausted (k = length)
-                if (k == length && i < (length / 3) && j < (2 * length / 3)) {
-                    if (a[i] < a[j]) {
-                        aux[cursor++] = a[i++];
-                    } else {
-                        aux[cursor++] = a[j++];
-                    }
-                }
-
-                // i & j are exhausted  001
-                if (i == length / 3 && j == (2 * length / 3) && k < length) {
+            //if i is exhausted (i = length/3)
+            if (i == (length / 3) && j < ((2 * length / 3)) && k < length) {
+                if (a[j] < a[k]) {
+                    aux[cursor++] = a[j++];
+                } else {
                     aux[cursor++] = a[k++];
                 }
+            }
 
-                // i & k are exhausted 010
-                if (i == (length / 3) && j < (2 * length / 3) && k == length) {
+            //if j is exhausted (j = (2*length/3)))
+            if (j == (2 * length / 3) && i < length / 3 && k < length) {
+                if (a[i] < a[k]) {
                     aux[cursor++] = a[i++];
+                } else {
+                    aux[cursor++] = a[k++];
                 }
+            }
 
-                // j & k are exhausted 100
-                if (i < (length / 3) && j == (2 * length / 3) && k == length) {
+            //if k is exhausted (k = length)
+            if (k == length && i < (length / 3) && j < (2 * length / 3)) {
+                if (a[i] < a[j]) {
                     aux[cursor++] = a[i++];
+                } else {
+                    aux[cursor++] = a[j++];
                 }
+            }
+
+            // i & j are exhausted  001
+            if (i == length / 3 && j == (2 * length / 3) && k < length) {
+                aux[cursor++] = a[k++];
+            }
+
+            // i & k are exhausted 010
+            if (i == (length / 3) && j < (2 * length / 3) && k == length) {
+                aux[cursor++] = a[i++];
+            }
+
+            // j & k are exhausted 100
+            if (i < (length / 3) && j == (2 * length / 3) && k == length) {
+                aux[cursor++] = a[i++];
+            }
 
         }
         for (i = 0; i < length; i++) /* copying back */
             a[i] = aux[i];
     }
+}
 
 
 
@@ -110,7 +111,7 @@ int main ()
 
     mergesortthird(a, aux, 9);
 
-    for ( int i = 0; i<10; i++)
+    for ( int i = 0; i<9; i++)
     {
         std::cout<<a[i]<< std::endl;
     }
