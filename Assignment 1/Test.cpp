@@ -537,115 +537,99 @@ void mergesortthird(int *a, int *aux, int length)
     }
 // split the array now
 // else
-    mergesortthird(a, aux, (length/3) );
-    mergesortthird(a + length/3, aux, (2*length)/3);
-    mergesortthird(a + (2*length/3), aux, length - (2*length/3));
+    else {
 
-    i = 0;
-    //length/3;
-    j = length/3;
-    //length - (2*length/3);
-    k = length - (2*length/3);
-    //length - (length/3);
 
-    // If no array has been exhausted
-    // one wheere each one is exhausted
-    // one where two are exhausted, so just move all of the last one
-    while ( i< length/3  && j < (length - (2*length/3)) && k <length)
-    {
-        // i is the smallest
-        if(a[i]<a[j] && a[i]<a[k])
-        {
-            aux[cursor++] = a[i++];
-        }
+//    mergesortthird(a + length/3, aux, (2*length/3) - (length/3));
+//    mergesortthird(a + (2*length/3), aux, (length - (2*length/3)));
 
-        // j is the smallest
-        if(a[j]<a[i] && a[j]<a[k])
-        {
-            aux[cursor++] = a[j++];
-        }
 
-        // k is the smallest
-        if(a[k]<a[i] && a[k]<a[j])
-        {
-            aux[cursor++] = a[k++];
-        }
 
-        //if i is exhausted (i = length/3)
-        if(i == length/3)
-        {
-            while(j < (length - (2*length/3)) && k <length)
-            {
-                if (a[j]<a[k])
-                {
-                    aux[cursor++] = a[j++];
-                }
-                else
-                {
-                    aux[cursor++] = a[k++];
-                }
+        mergesortthird(a, aux, (length / 3) );
+        mergesortthird(a + (length / 3), aux, ((2 * length) / 3));
+        mergesortthird(a + (2 * length / 3), aux, length - (2 * length / 3));
+
+        i = 0;
+        //length/3;
+        j = length / 3;
+        //length - (2*length/3);
+        k = length - (2 * length / 3);
+        //length - (length/3);
+
+        // If no array has been exhausted
+        // one wheere each one is exhausted
+        // one where two are exhausted, so just move all of the last one
+        while (i < length / 3 && j < (length - (2 * length / 3)) && k < length) {
+            // i is the smallest
+            if (a[i] < a[j] && a[i] < a[k]) {
+                aux[cursor++] = a[i++];
             }
-        }
 
-//if j is exhausted (j = (length - (2*length/3)))
-        if(j == (length - (2*length/3)))
-        {
-            while( i < length/3 && k <length)
-            {
-                if (a[i]<a[k])
-                {
-                    aux[cursor++] = a[i++];
-                }
-                else
-                {
-                    aux[cursor++] = a[k++];
-                }
-            }
-        }
-
-//if k is exhausted (k = length)
-        if(k == length)
-        {
-            while( i < length/3 && j < (length - (2*length/3)))
-            {
-                if (a[i]<a[j])
-                {
-                    aux[cursor++] = a[i++];
-                }
-                else
-                {
-                    aux[cursor++] = a[j++];
-                }
-            }
-        }
-
-        // i & j are exhausted  001
-        if (i == length/3 && j == (length - (2*length/3)))
-        {
-            // as long as k isn't exhausted
-            while(k<length)
-            {
-                aux[cursor++] = a[k++];
-            }
-        }
-
-        // i & k are exhausted 010
-        if(i == length/3 && k == length)
-        {
-            // while j is not exhausted
-            while(j < (length - (2*length/3)))
-            {
+            // j is the smallest
+            if (a[j] < a[i] && a[j] < a[k]) {
                 aux[cursor++] = a[j++];
             }
-        }
 
-        // j & k are exhausted 100
-        if(j == (length - (2*length/3)) && k == length)
-        {
-            // while j is not exhausted
-            while(i<length/3)
-            {
-                aux[cursor++] = a[i++];
+            // k is the smallest
+            if (a[k] < a[i] && a[k] < a[j]) {
+                aux[cursor++] = a[k++];
+            }
+
+            //if i is exhausted (i = length/3)
+            if (i == length / 3) {
+                while (j < (length - (2 * length / 3)) && k < length) {
+                    if (a[j] < a[k]) {
+                        aux[cursor++] = a[j++];
+                    } else {
+                        aux[cursor++] = a[k++];
+                    }
+                }
+            }
+
+//if j is exhausted (j = (length - (2*length/3)))
+            if (j == (length - (2 * length / 3))) {
+                while (i < length / 3 && k < length) {
+                    if (a[i] < a[k]) {
+                        aux[cursor++] = a[i++];
+                    } else {
+                        aux[cursor++] = a[k++];
+                    }
+                }
+            }
+
+//if k is exhausted (k = length)
+            if (k == length) {
+                while (i < length / 3 && j < (length - (2 * length / 3))) {
+                    if (a[i] < a[j]) {
+                        aux[cursor++] = a[i++];
+                    } else {
+                        aux[cursor++] = a[j++];
+                    }
+                }
+            }
+
+            // i & j are exhausted  001
+            if (i == length / 3 && j == (length - (2 * length / 3))) {
+                // as long as k isn't exhausted
+                while (k < length) {
+                    aux[cursor++] = a[k++];
+                }
+            }
+
+            // i & k are exhausted 010
+            if (i == length / 3 && k == length) {
+                // while j is not exhausted
+                while (j < (length - (2 * length / 3))) {
+                    aux[cursor++] = a[j++];
+                }
+            }
+
+            // j & k are exhausted 100
+            if (j == (length - (2 * length / 3)) && k == length) {
+                // while j is not exhausted
+                while (i < length / 3) {
+                    aux[cursor++] = a[i++];
+                }
             }
         }
     }
@@ -656,7 +640,7 @@ void mergesortthird(int *a, int *aux, int length)
 
 int main ()
 {
-    int a[9] = {-1, 1, 2, 3, 4, 1, 4, 3, 2};
+    int a[9] = { 4, 6, 9, 2, 13, 26, 74, 67, 97};
     int aux[9];
 
     mergesortthird(a, aux, 9);
