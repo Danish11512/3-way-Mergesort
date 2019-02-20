@@ -2,36 +2,24 @@
 #include <stdlib.h>
 
 
-
 void merge_sort(int *a, int *aux, int length) {
-    int temp, i, j, k;
-    int cursor = 0;
-
-    if (length > 1)// base case takes care of 2 and 1
-    {
-        if (length == 2) // change format
-        {
-            if (a[0] > a[1]) {
-                temp = a[0];
-                a[0] = a[1];
-                a[1] = temp;
+    int cursor = 0, i, j, k, temp;
+    if(length > 1) {
+        if(length == 2) {
+            if(*a > *(a+1)) {
+                temp = *a;
+                *a = *(a+1);
+                *(a+1) = temp;
             }
             return;
         }
 
+        merge_sort(a, aux, length/3);
+        merge_sort(a + (length/3), aux, length/3);
+        merge_sort(a + (2*(length/3)), aux, length - (2 * (length/3)));
 
-        merge_sort(a, aux, (length / 3));
-        merge_sort(a + (length / 3), aux, (length) / 3);
-        merge_sort(a + (2 * length / 3), aux, length - (2 * length / 3));
-
-
-        // one where each one is exhausted
-        // one where two are exhausted, so just move all of the last one
-
-        for (cursor = 0, i = 0, j = length / 3, k = (2 * length / 3); cursor < length;) {
-            // If no array has been exhausted
-            if (i < (length / 3) && j < (2 * length / 3) && k < length) {
-
+        for(cursor = 0, i = 0, j = (length/3), k = (2*(length/3)); cursor < length; ) {
+            if(i < (length/3) && j < (2*(length/3)) && k < length) {
                 // i is the smallest
                 if (a[i] < a[j] && a[i] < a[k]) {
                     aux[cursor++] = a[i++];
@@ -47,56 +35,54 @@ void merge_sort(int *a, int *aux, int length) {
                     aux[cursor++] = a[k++];
                 }
             }
-
-            //if i is exhausted (i = length/3)
-            if (i == (length / 3) && j < ((2 * length / 3)) && k < length) {
-                if (a[j] < a[k]) {
+            if(i == (length/3) && j < (2*(length/3)) && k < length) {
+                if(a[j] < a[k]) {
                     aux[cursor++] = a[j++];
-                } else {
+                }
+                else {
                     aux[cursor++] = a[k++];
                 }
             }
-
-            //if j is exhausted (j = (2*length/3)))
-            if ( i < (length / 3) && j == (2 * length / 3) && k < length) {
+            if(i < (length/3) && j == (2*(length/3)) && k < length) {
                 if (a[i] < a[k]) {
                     aux[cursor++] = a[i++];
-                } else {
+                }
+                else {
                     aux[cursor++] = a[k++];
                 }
             }
-
-            //if k is exhausted (k = length)
-            if (i < (length / 3) && j < (2 * length / 3) && k == length ) {
+            if(i < (length/3) && j < (2*(length/3)) && k == length) {
                 if (a[i] < a[j]) {
                     aux[cursor++] = a[i++];
-                } else {
+                }
+                else {
                     aux[cursor++] = a[j++];
                 }
-            }
-
-            // j & k are exhausted 100
-            if (i < (length / 3) && j == (2 * length / 3) && k == length) {
-                aux[cursor++] = a[i++];
-            }
-
-            // i & k are exhausted 010
-            if (i == (length / 3) && j < (2 * length / 3) && k == length) {
-                aux[cursor++] = a[i++];
             }
 
             // i & j are exhausted  001
-            if (i == (length / 3) && j == (2 * length / 3) && k < length) {
+            if(i == (length/3) && j == (2*(length/3)) && k < length) {
                 aux[cursor++] = a[k++];
             }
+
+            // i & k are exhausted 010
+            if(i == (length/3) && j < (2*(length/3)) && k == length) {
+                aux[cursor++] = a[j++];
+            }
+
+            // j & k are exhausted 100
+            if(i < (length/3) && j == (2*(length/3)) && k == length) {
+                aux[cursor++] = a[i++];
+            }
+
+
+
         }
-        for (i = 0; i < length; i++) {/* copying back */
+        for (int i = 0; i < length; i++) {/* copying back */
             a[i] = aux[i];
         }
     }
 }
-
-
 
 
 int main()
