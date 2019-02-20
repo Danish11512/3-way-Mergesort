@@ -6,10 +6,10 @@
 void mergesortthird(int *a, int *aux, int length) {
     int temp, i, j, k, cursor = 0;
 
-    if (length < 3) // base case takes care of 2 and 1
+    if (length >1) // base case takes care of 2 and 1
 
         //CCHANAGE
-    {
+
         if (length == 2) // change format
         {
             if (*a > *(a + 1)) {
@@ -17,9 +17,9 @@ void mergesortthird(int *a, int *aux, int length) {
                 *a = *(a + 1);
                 *(a + 1) = temp;
             }
+            return;
         }
-        return;
-    } else {
+
 
         mergesortthird(a, aux, (length / 3));
         mergesortthird(a + (length / 3), aux, (length) / 3);
@@ -34,9 +34,9 @@ void mergesortthird(int *a, int *aux, int length) {
 
         // one where each one is exhausted
         // one where two are exhausted, so just move all of the last one
-        for (i = 0, j = length / 3, k = length; i++;) {
+        for (cursor =0,i = 0, j = length / 3, k = (2*length/3); cursor<length;) {
             // If no array has been exhausted
-            if (i < j && j < k && k < length) {   // i is the smallest
+            if (i < (length/3) && j < (2*length/3) && k < length) {   // i is the smallest
                 if (a[i] < a[j] && a[i] < a[k]) {
                     aux[cursor++] = a[i++];
                 }
@@ -50,6 +50,7 @@ void mergesortthird(int *a, int *aux, int length) {
                 if (a[k] < a[i] && a[k] < a[j]) {
                     aux[cursor++] = a[k++];
                 }
+            }
 
                 //if i is exhausted (i = length/3)
                 if (i == (length / 3) && j < ((2 * length / 3)) && k < length) {
@@ -93,17 +94,10 @@ void mergesortthird(int *a, int *aux, int length) {
                     aux[cursor++] = a[i++];
                 }
 
-            }
-
         }
         for (i = 0; i < length; i++) /* copying back */
             a[i] = aux[i];
     }
-}
-
-
-
-
 
 
 
