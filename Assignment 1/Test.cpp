@@ -553,13 +553,13 @@ void mergesortthird(int *a, int *aux, int length)
         //length/3;
         j = length / 3;
         //length - (2*length/3);
-        k = length - (2 * length / 3);
+        k = (2*length / 3);
         //length - (length/3);
 
         // If no array has been exhausted
-        // one wheere each one is exhausted
+        // one where each one is exhausted
         // one where two are exhausted, so just move all of the last one
-        while (i < length / 3 && j < (length - (2 * length / 3)) && k < length) {
+        while (i < j && j < k && k < length) {
             // i is the smallest
             if (a[i] < a[j] && a[i] < a[k]) {
                 aux[cursor++] = a[i++];
@@ -641,6 +641,7 @@ void mergesortthird(int *a, int *aux, int length)
 int main ()
 {
     int a[9] = { 4, 6, 9, 2, 13, 26, 74, 67, 97};
+    // 2, 4, 6, 9, 13, 26, 74, 67, 97
     int aux[9];
 
     mergesortthird(a, aux, 9);
