@@ -1,0 +1,4 @@
+Write a mergesort function which makes three recursive calls of length n/3 on an array of size n, and then merges three sorted arrays into one. You need a special case for arrays of length 2. 
+
+void mergesort(int * a, int * aux, int length);
+
