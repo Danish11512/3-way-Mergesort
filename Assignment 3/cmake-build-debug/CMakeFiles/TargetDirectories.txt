@@ -1,0 +1,3 @@
+C:/Users/danis/Google Drive/College/Class/CSC 22000/untitled/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/danis/Google Drive/College/Class/CSC 22000/untitled/cmake-build-debug/CMakeFiles/untitled.dir
+C:/Users/danis/Google Drive/College/Class/CSC 22000/untitled/cmake-build-debug/CMakeFiles/rebuild_cache.dir
