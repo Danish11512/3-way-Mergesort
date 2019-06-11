@@ -1,0 +1,74 @@
+//Danish Faruqi - CSC2200-C
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <queue>
+#include <algorithm>
+
+using namespace std;
+
+bool bfs(int * residualgraph, int s, int t, int n, int *augmentedpath){
+   //create an array for visited, and mark all of them as not visited
+   bool visitedarr[n];
+   for(int i = 0; i<n; i++){
+       visitedarr[i] = false;
+   }
+
+   // create queue, push in source and mark it as visited
+
+   queue <int> bfsqueue;
+   visitedarr[s] = true;
+   augmentedpath[s] = -1;
+   bfsqueue.push(s);
+
+   // bfs loop
+   while(!bfsqueue.empty()){
+      int popped = bfsqueue.front();
+      bfsqueue.pop();
+
+      for(int i = 0; i<n; i++){
+          if(!visitedarr[i] && *(residualgraph + popped*n + i)>0){
+
+              bfsqueue.push(i);
+              augmentedpath[i] = popped;
+              visitedarr[i] = true;
+
+          }
+      }
+   }
+   return visitedarr[t];
+}
+
+
+void maximum_flow(int n, int s, int t, int *cap, int *flow){
+    int augmentedpath[n];
+    int bottleneck = INT_MAX;
+    int *residualgraph = new int[n*n];
+
+    // filling residual graph with copies
+    for(int i = 0; i<n; i++){
+        for(int j = 0; j<n; j++){
+            *(residualgraph + i*n + j) = *(cap + i*n + j);
+        }
+    }
+
+    *(flow + s*n + t) = *(cap + s*n + t);
+    *(residualgraph + s*n + t) = 0;
+
+//    get bottleneck and update graph
+    while(bfs(residualgraph, s, t, n, augmentedpath)){
+        // finding min/ bottleneck
+        for (int i = t; i > s; i = augmentedpath[i]) {
+            bottleneck = min(bottleneck, *(residualgraph + augmentedpath[i] * n + i));
+        }
+        // update flow and residual graph
+        for ( int i = t; i>s; i = augmentedpath[i]){
+            *(residualgraph + augmentedpath[i] * n + i) -= bottleneck;
+            *(flow + augmentedpath[i] * n + i) += bottleneck;
+        }
+    }
+    delete[] residualgraph;
+}
+
+

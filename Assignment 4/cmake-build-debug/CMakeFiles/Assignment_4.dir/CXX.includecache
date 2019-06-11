@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/danis/Google Drive/College/Class/CSC 22000/Assignment 4/main.cpp
+stdio.h
+-
+stdlib.h
+-
+queue
+-
+algorithm
+-
+
